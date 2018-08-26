@@ -51,7 +51,8 @@ class ViewController: UIViewController {
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
         
         let img = renderer.image { (ctx) in
-            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512)
+            //clipped image fix, indents by 5 points on each side
+            let rectangle = CGRect(x: 5, y: 5, width: 502, height: 502)
             
             ctx.cgContext.setFillColor(UIColor.red.cgColor)
             ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
