@@ -143,6 +143,35 @@ class ViewController: UIViewController {
         imageView.image = img
     }
     
+    func drawImagesAndText() {
+        //all strings have built-in method called draw(with:) to draw the string in a rectangle you specify
+        //images can also be drawn right into a context
+        
+        //create a renderer at the correct size
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        let img = renderer.image { (ctx) in
+            
+            //define a paragraph style that aligns text to center
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            
+            //create an attributes dictionary containing that paragraph style and a font
+            let attrs = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Thin", size: 36)!, NSAttributedStringKey.paragraphStyle: paragraphStyle]
+            
+            //draw a string to the screen, using attributes dictionary
+            //explictly setting the string type to NSString for autocomplete purposes
+            let string: NSString = "The best-laid schemes o'\nmice an' men gang aft agley"
+            string.draw(with: CGRect(x: 32, y: 32, width: 448, height: 448), options: .usesLineFragmentOrigin, attributes: attrs, context: nil)
+            
+            //load image from the project and draw to the context
+            let mouse = UIImage(named: "mouse")
+            mouse?.draw(at: CGPoint(x: 300, y: 150))
+            
+        }
+        
+        imageView.image = img
+    }
+    
     @IBAction func redrawTapped(_ sender: Any) {
         //+=1 to the currentDrawType, set to 0 when it reaches a certain point
         //use switch/case on the property to determine which method to call
@@ -168,6 +197,9 @@ class ViewController: UIViewController {
             
         case 4:
             drawLines()
+            
+        case 5:
+            drawImagesAndText()
             
         default:
             break
